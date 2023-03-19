@@ -1,42 +1,30 @@
-# python3
+[22:59, 19/03/2023] Krishjanis (Eriņa): import heapq
 
-
-def build_heap(data):
-    swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
-
-
-    return swaps
+def parallel_processing(n, m, data):
+    output = []
+    pavedieni = [(0, i) for i in range(n)]
+    heapq.heapify(pavedieni)
+    for i in range(m):
+        time = data[i]
+        f_time, pavediens = heapq.heappop(pavedieni)
+        if output:
+            s_time = max(f_time, output[-1][1])
+        else:
+            s_time = f_time
+        f_time = s_time + time
+        output.append((pavediens, s_time))
+        heapq.heappush(pavedieni, (f_time, pavediens))
+    return output
 
 
 def main():
-    
-    # TODO : add input and corresponding checks
-    # add another input for I or F 
-    # first two tests are from keyboard, third test is from a file
-
-
-    # input from keyboard
-    n = int(input())
+    n, m = map(int, input().split())
     data = list(map(int, input().split()))
+[22:59, 19/03/2023] Krishjanis (Eriņa): result = parallel_processing(n, m, data)
 
-    # checks if lenght of data is the same as the said lenght
-    assert len(data) == n
-
-    # calls function to assess the data 
-    # and give back all swaps
-    swaps = build_heap(data)
-
-    # TODO: output how many swaps were made, 
-    # this number should be less than 4n (less than 4*len(data))
+    for pavediens, start_time in result:
+        print(pavediens, start_time)
 
 
-    # output all swaps
-    print(len(swaps))
-    for i, j in swaps:
-        print(i, j)
-
-
-if __name__ == "__main__":
+if name == "main":
     main()
